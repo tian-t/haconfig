@@ -16,13 +16,16 @@ homeassistant:
   name: Tian Home
   latitude: !secret latitude
   longitude: !secret longitude
-  elevation: elevation
+  elevation: !secret elevation
   unit_system: metric
   time_zone: Asia/Shanghai
   
 
 # 启用配置界面
 config:
+
+frontend:
+  themes: !include_dir_merge_named themes
 
 # 自动发现一些设备
 #discovery:
@@ -34,7 +37,7 @@ map:
 sun:
 
 # 激活iOS客户端
-ios:
+#ios:
 
 # 开启homekit 支持
 homekit:
@@ -46,13 +49,43 @@ homekit:
       - switch
 
 # 设备
-# xiaomi
-xiaomi_aqara:
-  discovery_retry: 5
-  gateways:
-    - host: 192.168.199.56
-      key: !secret xiaomi_aqara_gateway_key
 
+fan:
+  - platform: xiaomi_miio
+    host: !secret airpurifierhost
+    token: !secret airpurifiertoken
+    name: airpurifier
+
+switch:
+  - platform: xiaomi_miio
+    host: !secret plug1host
+    token: !secret plug1token
+    name: plug1
+
+yeelight:
+  devices:
+    !secret wsydhost:
+      name: 主卧右灯
+    !secret ttmdhost:
+      name: 榻榻米灯
+
+sensor:
+  - platform: template
+    sensors:
+      airpurifier_temp:
+        friendly_name: 主卧温度
+        value_template: '{{ states.fan.airpurifier.attributes.temperature }}'
+        unit_of_measurement: 'C'
+      airpurifier_humi:
+        friendly_name: 主卧湿度
+        value_template: '{{ states.fan.airpurifier.attributes.humidity }}'
+        unit_of_measurement: '%'
+
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
 
 # 记录到数据库中，有 history 和 logbook 去处理
 recorder:
