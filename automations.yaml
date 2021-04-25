@@ -1,21 +1,21 @@
-- alias: "主卧恒温"
-  trigger: 
-    platform: time_pattern
-    minutes: '/1'
-  condition:
-    condition: or
-    conditions:
-      - condition: template
-        value_template: "{{ states('sensor.time')  > '21:45' }}"
-      - condition: template
-        value_template: "{{ states('sensor.time')  < '07:25' }}"
-  action:
-    - service_template: >
-        {% if states('sensor.airpurifier_temp') | float < 23.5 %}
-        switch.turn_on
-        {% elif states('sensor.airpurifier_temp') | float > 24.0 %}
-        switch.turn_off
-        {% else %}
-         
-        {% endif %}
-      entity_id: switch.plug1
+#- alias: "主卧恒温"
+#  trigger: 
+#    platform: time_pattern
+#    minutes: '/1'
+#  condition:
+#    condition: or
+#    conditions:
+#      - condition: template
+#        value_template: "{{ states('sensor.time')  > '21:45' }}"
+#      - condition: template
+#        value_template: "{{ states('sensor.time')  < '07:25' }}"
+#  action:
+#    - service_template: >
+#        {% if states('sensor.airpurifier_temp') | float < 23.5 %}
+#        switch.turn_on
+#        {% elif states('sensor.airpurifier_temp') | float > 24.0 %}
+#        switch.turn_off
+#        {% else %}
+#         
+#        {% endif %}
+#      entity_id: switch.plug1
