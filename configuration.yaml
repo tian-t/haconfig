@@ -50,42 +50,42 @@ homekit:
 
 # 设备
 
-fan:
-  - platform: xiaomi_miio
-    host: !secret airpurifierhost
-    token: !secret airpurifiertoken
-    name: airpurifier
+#fan:
+#  - platform: xiaomi_miio
+#    host: !secret airpurifierhost
+#    token: !secret airpurifiertoken
+#    name: airpurifier
 
-switch:
-  - platform: xiaomi_miio
-    host: !secret plug1host
-    token: !secret plug1token
-    name: plug1
+#switch:
+#  - platform: xiaomi_miio
+#    host: !secret plug1host
+#    token: !secret plug1token
+#    name: plug1
 
 yeelight:
   devices:
     !secret wsydhost:
       name: 主卧右灯
-    !secret ttmdhost:
-      name: 榻榻米灯
+#    !secret ttmdhost:
+#      name: 榻榻米灯
 
-sensor:
-  - platform: template
-    sensors:
-      airpurifier_temp:
-        friendly_name: 主卧温度
-        value_template: '{{ states.fan.airpurifier.attributes.temperature }}'
-        unit_of_measurement: 'C'
-      airpurifier_humi:
-        friendly_name: 主卧湿度
-        value_template: '{{ states.fan.airpurifier.attributes.humidity }}'
-        unit_of_measurement: '%'
+#sensor:
+#  - platform: template
+#    sensors:
+#      airpurifier_temp:
+#        friendly_name: 主卧温度
+#        value_template: '{{ states.fan.airpurifier.attributes.temperature }}'
+#        unit_of_measurement: 'C'
+#      airpurifier_humi:
+#        friendly_name: 主卧湿度
+#        value_template: '{{ states.fan.airpurifier.attributes.humidity }}'
+#        unit_of_measurement: '%'
 
-  - platform: time_date
-    display_options:
-      - 'time'
-      - 'date'
-      - 'date_time'
+#  - platform: time_date
+#    display_options:
+#      - 'time'
+#      - 'date'
+#      - 'date_time'
 
 # 记录到数据库中，有 history 和 logbook 去处理
 recorder:
